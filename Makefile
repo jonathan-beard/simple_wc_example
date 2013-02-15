@@ -3,17 +3,16 @@ CXX   ?= clang++
 
 EXE = my_wc
 
-CDEBUG = -g -Wextra  -Wall  -Waddress -ggdb\
-         -fcheck-new  -gstabs 
+CDEBUG = -g -Wall
 
-CXXDEBUG = -g -Wall  -Waddress -ggdb\
-            -fcheck-new  -Wstrict-null-sentinel 
-
-CFLAGS = -O0  #$(CDEBUG)
-CXXFLAGS = -O0  #$(CXXDEBUG)
+CXXDEBUG = -g -Wall
 
 CSTD = -std=c99
 CXXSTD = -std=c++11
+
+CFLAGS = -O0  $(CDEBUG) $(CSTD) 
+CXXFLAGS = -O0  $(CXXDEBUG) $(CXXSTD)
+
 
 CPPOBJ = main mc_driver
 SOBJ =  parser lexer
@@ -36,17 +35,17 @@ all: wc
 wc: $(FILES)
 	$(MAKE) $(SOBJ)
 	$(MAKE) $(OBJS)
-	$(CXX) $(CXXFLAGS) $(CXXSTD) -o $(EXE) $(OBJS) parser.o lexer.o $(LIBS)
+	$(CXX) $(CXXFLAGS) -o $(EXE) $(OBJS) parser.o lexer.o $(LIBS)
 	rm -rf *.o
 
 
 parser: mc_parser.yy
 	bison -d -v mc_parser.yy
-	$(CXX) -O0 -g -Wall -c -o parser.o mc_parser.tab.cc
+	$(CXX) $(CXXFLAGS) -c -o parser.o mc_parser.tab.cc
 
 lexer: mc_lexer.l
 	flex $<
-	$(CXX)  -O0 -g -Wall -c lex.yy.cc -o lexer.o
+	$(CXX)  $(CXXFLAGS) -c lex.yy.cc -o lexer.o
 
 %.o: %.cpp
 	$(CXX) -c $(CXXFLAGS) $(CXXSTD) -o $@ $<

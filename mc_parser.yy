@@ -49,12 +49,12 @@
 %%
 S     :  S UPPER     { driver.add_upper(); }
       |  S LOWER     { driver.add_lower(); }
-      |  S WORD      { driver.add_word( $2 ); }
+      |  S WORD      { driver.add_word( *$2 ); delete( $2 ); }
       |  S NEWLINE   { driver.add_newline(); }
       |  S CHAR      { driver.add_char(); }
       |  UPPER       { driver.add_upper(); }
       |  LOWER       { driver.add_lower(); }
-      |  WORD        { driver.add_word( $1 ); }
+      |  WORD        { driver.add_word( *$1 ); delete( $1 ); }
       |  NEWLINE     { driver.add_newline(); }
       |  CHAR        { driver.add_char(); }
 %%

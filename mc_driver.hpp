@@ -13,7 +13,10 @@ public:
                  words(0),
                  lines(0),
                  uppercase(0),
-                 lowercase(0) {};
+                 lowercase(0),
+                 parser( nullptr ),
+                 scanner( nullptr ){};
+
    virtual ~MC_Driver();
 
    void parse( const char *filename );
@@ -21,7 +24,7 @@ public:
 
    void add_upper();
    void add_lower();
-   void add_word( std::string *c );
+   void add_word( const std::string &c );
    void add_newline();
    void add_char();
 
