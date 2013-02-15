@@ -27,7 +27,7 @@ CLEANLIST =  $(addsuffix .o, $(OBJ)) $(OBJS) \
 				 mc_parser.tab.cc mc_parser.tab.hh \
 				 location.hh position.hh \
 			    stack.hh mc_parser.output parser.o \
-				 lexer.o lex.yy.cc $(EXE)\
+				 lexer.o mc_lexer.yy.cc $(EXE)\
 
 .PHONY: all
 all: wc
@@ -44,8 +44,8 @@ parser: mc_parser.yy
 	$(CXX) $(CXXFLAGS) -c -o parser.o mc_parser.tab.cc
 
 lexer: mc_lexer.l
-	flex $<
-	$(CXX)  $(CXXFLAGS) -c lex.yy.cc -o lexer.o
+	flex --outfile=mc_lexer.yy.cc  $<
+	$(CXX)  $(CXXFLAGS) -c mc_lexer.yy.cc -o lexer.o
 
 %.o: %.cpp
 	$(CXX) -c $(CXXFLAGS) $(CXXSTD) -o $@ $<
