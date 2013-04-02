@@ -13,7 +13,7 @@ typedef MC::MC_Parser::token token;
 /* define yyterminate as this instead of NULL */
 #define yyterminate() return(token::END)
 
-/* wamckee 2013 APR 1 - msvc2010 requires that we exclude this header file. */
+/* msvc2010 requires that we exclude this header file. */
 #define YY_NO_UNISTD_H
 
 %}
