@@ -17,8 +17,6 @@ CXXFLAGS = -O0  $(CXXDEBUG) $(CXXSTD)
 CPPOBJ = main mc_driver
 SOBJ =  parser lexer
 
-LIBS = -lfl
-
 FILES = $(addsuffix .cpp, $(CPPOBJ))
 
 OBJS  = $(addsuffix .o, $(CPPOBJ))
@@ -36,7 +34,6 @@ wc: $(FILES)
 	$(MAKE) $(SOBJ)
 	$(MAKE) $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(EXE) $(OBJS) parser.o lexer.o $(LIBS)
-	rm -rf *.o
 
 
 parser: mc_parser.yy
@@ -47,8 +44,6 @@ lexer: mc_lexer.l
 	flex --outfile=mc_lexer.yy.cc  $<
 	$(CXX)  $(CXXFLAGS) -c mc_lexer.yy.cc -o lexer.o
 
-%.o: %.cpp
-	$(CXX) -c $(CXXFLAGS) $(CXXSTD) -o $@ $<
 
 .PHONY: clean
 clean:

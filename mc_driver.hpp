@@ -3,7 +3,7 @@
 
 #include <string>
 #include "mc_scanner.hpp"
-#include "mc_Parser.tab.hh"
+#include "mc_parser.tab.hh"
 
 namespace MC{
 

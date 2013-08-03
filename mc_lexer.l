@@ -26,11 +26,9 @@ typedef MC::MC_Parser::token token;
 
 %%
 [a-z]       { 
-               yylval->sval = STOKEN( yytext );  
                return(token::LOWER);     
             }
 [A-Z]       { 
-               yylval->sval = STOKEN( yytext );  
                return(token::UPPER);     
             }
 [a-zA-Z]+   { 
@@ -38,11 +36,9 @@ typedef MC::MC_Parser::token token;
                return(token::WORD);      
             }
 \n          { 
-               yylval->sval = STOKEN( yytext );  
                return(token::NEWLINE);   
             }
 .           { 
-               yylval->sval = STOKEN( yytext );  
                return(token::CHAR);      
             }
 %%

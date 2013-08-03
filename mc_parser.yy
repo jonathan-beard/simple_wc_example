@@ -38,16 +38,15 @@
    std::string *sval;
 }
 
-%token        END    0     "end of file"
-%token <sval> UPPER
-%token <sval> LOWER
-%token <sval> WORD
-%token <sval> NEWLINE
-%token <sval> CHAR
+%token            END    0     "end of file"
+%token            UPPER
+%token            LOWER
+%token   <sval>   WORD
+%token            NEWLINE
+%token            CHAR
 
-%type <sval> object
 
-%destructor { delete( $$ ); } UPPER LOWER WORD NEWLINE CHAR
+%destructor { delete( $$ ); } WORD
 
 
 %%
@@ -55,11 +54,9 @@
 list_option : END | list END;
 
 list
-  : object
-  | list object
+  : item
+  | list item
   ;
-
-object : item { delete( $$ ); }
 
 item
   : UPPER   { driver.add_upper(); }
@@ -77,7 +74,6 @@ void MC::MC_Parser::error( const MC::MC_Parser::location_type &l,
 {
    std::cerr << "Error: " << err_message << "\n"; 
 }
-
 
 
 /* include for access to scanner.yylex */
