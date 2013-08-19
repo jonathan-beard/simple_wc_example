@@ -11,7 +11,7 @@ typedef MC::MC_Parser::token token;
 #define STOKEN( x ) ( new std::string( x ) )
 
 /* define yyterminate as this instead of NULL */
-#define yyterminate() return(token::END)
+#define yyterminate() return( token::END )
 
 /* msvc2010 requires that we exclude this header file. */
 #define YY_NO_UNISTD_H
@@ -26,20 +26,24 @@ typedef MC::MC_Parser::token token;
 
 %%
 [a-z]       { 
-               return(token::LOWER);     
+               return( token::LOWER );     
             }
+
 [A-Z]       { 
-               return(token::UPPER);     
+               return( token::UPPER );     
             }
+
 [a-zA-Z]+   { 
                yylval->sval = STOKEN( yytext );  
-               return(token::WORD);      
+               return( token::WORD );      
             }
+
 \n          { 
-               return(token::NEWLINE);   
+               return( token::NEWLINE );   
             }
+
 .           { 
-               return(token::CHAR);      
+               return( token::CHAR );      
             }
 %%
 

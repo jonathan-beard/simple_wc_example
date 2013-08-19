@@ -2,8 +2,8 @@
 %require  "2.5"
 %debug 
 %defines 
-%define namespace "MC"
-%define parser_class_name "MC_Parser"
+%define api.namespace {MC}
+%define parser_class_name {MC_Parser}
 
 %code requires{
    namespace MC {
@@ -69,8 +69,8 @@ item
 %%
 
 
-void MC::MC_Parser::error( const MC::MC_Parser::location_type &l,
-                           const std::string &err_message)
+void 
+MC::MC_Parser::error( const std::string &err_message )
 {
    std::cerr << "Error: " << err_message << "\n"; 
 }
@@ -78,9 +78,10 @@ void MC::MC_Parser::error( const MC::MC_Parser::location_type &l,
 
 /* include for access to scanner.yylex */
 #include "mc_scanner.hpp"
-static int yylex(MC::MC_Parser::semantic_type *yylval,
-                 MC::MC_Scanner  &scanner,
-                 MC::MC_Driver   &driver)
+static int 
+yylex( MC::MC_Parser::semantic_type *yylval,
+       MC::MC_Scanner  &scanner,
+       MC::MC_Driver   &driver )
 {
    return( scanner.yylex(yylval) );
 }
