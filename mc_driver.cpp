@@ -6,7 +6,9 @@
 
 MC::MC_Driver::~MC_Driver(){ 
    delete(scanner);
+   scanner = nullptr;
    delete(parser);
+   parser = nullptr;
 }
 
 void 
@@ -17,17 +19,29 @@ MC::MC_Driver::parse( const char *filename )
    if( ! in_file.good() ) exit( EXIT_FAILURE );
    
    delete(scanner);
-   scanner = nullptr;
-   scanner = new MC::MC_Scanner( &in_file );
-   /* check to see if its initialized */
-   assert( scanner != nullptr );
+   try
+   {
+      scanner = new MC::MC_Scanner( &in_file );
+   }
+   catch( std::bad_alloc &ba )
+   {
+      std::cerr << "Failed to allocate scanner: (" <<
+         ba.what() << "), exiting!!\n";
+      exit( EXIT_FAILURE );
+   }
    
    delete(parser); 
-   parser = nullptr;
-   parser = new MC::MC_Parser( (*scanner) /* scanner */, 
-                               (*this) /* driver */ );
-   assert( parser != nullptr );
-   
+   try
+   {
+      parser = new MC::MC_Parser( (*scanner) /* scanner */, 
+                                  (*this) /* driver */ );
+   }
+   catch( std::bad_alloc &ba )
+   {
+      std::cerr << "Failed to allocate parser: (" << 
+         ba.what() << "), exiting!!\n";
+      exit( EXIT_FAILURE );
+   }
    const int accept( 0 );
    if( parser->parse() != accept )
    {
@@ -52,16 +66,16 @@ MC::MC_Driver::add_lower()
 }
 
 void 
-MC::MC_Driver::add_word( const std::string &c )
+MC::MC_Driver::add_word( const std::string &word )
 {
    words++; 
-   chars += c.length();
-   for(auto it(c.begin()); it != c.end(); ++it){
-      if( islower( (*it) ) )
+   chars += word.length();
+   for(const char &c : word ){
+      if( islower( c ) )
       { 
          lowercase++; 
       }
-      else if ( isupper( (*it) ) ) 
+      else if ( isupper( c ) ) 
       { 
          uppercase++; 
       }

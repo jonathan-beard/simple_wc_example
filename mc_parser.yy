@@ -1,5 +1,5 @@
 %skeleton "lalr1.cc"
-%require  "2.5"
+%require  "2.7"
 %debug 
 %defines 
 %define api.namespace {MC}
@@ -46,7 +46,8 @@
 %token            CHAR
 
 
-%destructor { delete( $$ ); } WORD
+/* destructor rule for <sval> objects */
+%destructor { if ($$)  { delete ($$); ($$) = nullptr; } } <sval>
 
 
 %%

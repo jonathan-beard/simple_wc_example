@@ -24,7 +24,7 @@ public:
 
    void add_upper();
    void add_lower();
-   void add_word( const std::string &c );
+   void add_word( const std::string &word );
    void add_newline();
    void add_char();
 
