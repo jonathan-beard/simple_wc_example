@@ -5,9 +5,6 @@
 #include <FlexLexer.h>
 #endif
 
-#undef  YY_DECL
-#define YY_DECL int  MC::MC_Scanner::yylex()
-
 #include "mc_parser.tab.hh"
 
 namespace MC{
