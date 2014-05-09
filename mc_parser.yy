@@ -12,10 +12,7 @@
    }
 }
 
-%lex-param   { MC_Scanner  &scanner  }
 %parse-param { MC_Scanner  &scanner  }
-
-%lex-param   { MC_Driver  &driver  }
 %parse-param { MC_Driver  &driver  }
 
 %code{
@@ -25,12 +22,9 @@
    
    /* include for all driver functions */
    #include "mc_driver.hpp"
-  
-   /* this is silly, but I can't figure out a way around */
-   static int yylex(MC::MC_Parser::semantic_type *yylval,
-                    MC::MC_Scanner  &scanner,
-                    MC::MC_Driver   &driver);
-   
+
+#undef yylex
+#define yylex scanner.yylex
 }
 
 /* token types */
@@ -75,15 +69,3 @@ MC::MC_Parser::error( const std::string &err_message )
 {
    std::cerr << "Error: " << err_message << "\n"; 
 }
-
-
-/* include for access to scanner.yylex */
-#include "mc_scanner.hpp"
-static int 
-yylex( MC::MC_Parser::semantic_type *yylval,
-       MC::MC_Scanner  &scanner,
-       MC::MC_Driver   &driver )
-{
-   return( scanner.yylex(yylval) );
-}
-
