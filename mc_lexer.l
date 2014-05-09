@@ -20,7 +20,7 @@ typedef MC::MC_Parser::token token;
 
 %option debug 
 %option nodefault 
-%option yyclass="MC_Scanner" 
+%option yyclass="MC::MC_Scanner" 
 %option noyywrap 
 %option c++
 
