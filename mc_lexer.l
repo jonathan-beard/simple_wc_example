@@ -1,8 +1,11 @@
 %{
 /* C++ string header, for string ops below */
 #include <string>
+
 /* Implementation of yyFlexScanner */ 
 #include "mc_scanner.hpp"
+#undef  YY_DECL
+#define YY_DECL int MC::MC_Scanner::yylex(MC::MC_Parser::semantic_type *lval)
 
 /* typedef to make the returns for the tokens shorter */
 typedef MC::MC_Parser::token token;
@@ -25,6 +28,10 @@ typedef MC::MC_Parser::token token;
 %option c++
 
 %%
+%{          // Code executed at the beginning of yylex
+            yylval = lval;
+%}
+
 [a-z]       { 
                return( token::LOWER );     
             }

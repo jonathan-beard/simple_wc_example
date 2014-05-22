@@ -15,16 +15,11 @@ public:
    MC_Scanner(std::istream *in) : yyFlexLexer(in),
                                   yylval( nullptr ){};
    
-   int yylex(MC::MC_Parser::semantic_type *lval)
-   {
-      yylval = lval;
-      return( yylex() ); 
-   }
-   
+   int yylex(MC::MC_Parser::semantic_type *lval);
+   // YY_DECL defined in mc_lexer.l
+   // Method body created by flex in mc_lexer.yy.cc
 
 private:
-   /* hide this one from public view */
-   int yylex();
    /* yyval ptr */
    MC::MC_Parser::semantic_type *yylval;
 };
