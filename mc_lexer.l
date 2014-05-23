@@ -41,7 +41,10 @@ typedef MC::MC_Parser::token token;
             }
 
 [a-zA-Z]+   { 
-               yylval->sval = STOKEN( yytext );  
+               // Section 10.1.5.1 of the 3.0.2 Bison Manual says the following should work
+               // yylval.build( yytext );
+               // But it doesn't.
+               yylval->build<std::string>( yytext );
                return( token::WORD );      
             }
 
