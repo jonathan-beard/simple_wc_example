@@ -4,7 +4,7 @@
 #include "mc_driver.hpp"
 
 int 
-main(const int argc, const char **argv)
+main( const int argc, const char **argv )
 {
    if(argc != 2 ) 
       return ( EXIT_FAILURE );

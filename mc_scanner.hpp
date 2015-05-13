@@ -15,7 +15,7 @@ public:
    MC_Scanner(std::istream *in) : yyFlexLexer(in),
                                   yylval( nullptr ){};
    
-   int yylex(MC::MC_Parser::semantic_type *lval)
+   int yylex(MC::MC_Parser::semantic_type * const lval)
    {
       yylval = lval;
       return( yylex() ); 
