@@ -1,7 +1,7 @@
 %{
 /* C++ string header, for string ops below */
 #include <string>
-/* Implementation of yyFlexScanner */ 
+/* Implementation of yyFlexScanner */
 #include "mc_scanner.hpp"
 
 /* typedef to make the returns for the tokens shorter */
@@ -16,34 +16,39 @@ typedef MC::MC_Parser::token token;
 /* msvc2010 requires that we exclude this header file. */
 #define YY_NO_UNISTD_H
 
+/* update location on matching */
+#define YY_USER_ACTION loc->step(); loc->columns(yyleng);
+
 %}
 
-%option debug 
-%option nodefault 
-%option yyclass="MC::MC_Scanner" 
-%option noyywrap 
+%option debug
+%option nodefault
+%option yyclass="MC::MC_Scanner"
+%option noyywrap
 %option c++
 
 %%
-[a-z]       { 
-               return( token::LOWER );     
+[a-z]       {
+               return( token::LOWER );
             }
 
-[A-Z]       { 
-               return( token::UPPER );     
+[A-Z]       {
+               return( token::UPPER );
             }
 
-[a-zA-Z]+   { 
-               yylval->sval = STOKEN( yytext );  
-               return( token::WORD );      
+[a-zA-Z]+   {
+               yylval->sval = STOKEN( yytext );
+               return( token::WORD );
             }
 
-\n          { 
-               return( token::NEWLINE );   
+\n          {
+               // Update line number
+               loc->lines();
+               return( token::NEWLINE );
             }
 
-.           { 
-               return( token::CHAR );      
+.           {
+               return( token::CHAR );
             }
 %%
 

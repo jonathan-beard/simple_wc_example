@@ -42,6 +42,7 @@
 
 /* destructor rule for <sval> objects */
 %destructor { if ($$)  { delete ($$); ($$) = nullptr; } } <sval>
+%locations
 
 
 %%
@@ -65,7 +66,7 @@ item
 
 
 void 
-MC::MC_Parser::error( const std::string &err_message )
+MC::MC_Parser::error( const location_type &l, const std::string &err_message )
 {
-   std::cerr << "Error: " << err_message << "\n"; 
+   std::cerr << "Error: " << err_message << " at " << l << "\n";
 }
