@@ -54,13 +54,12 @@ before_script:
     - echo $LC_ALL
     - wget --no-check-certificate http://ftp.gnu.org/gnu/bison/bison-3.0.4.tar.gz
     - mkdir $HOME/bison
-    - tar -xf bison-3.0.4.tar.gz; cd bison-3.0.4; ./configure --prefix=$HOME/bison; make -j 4 install; cd $HOME
-    - export PATH=$PWD/bison/bin:$PATH
+    - tar -xf bison-3.0.4.tar.gz; cd bison-3.0.4; ./configure --prefix=$HOME/bison; make -j 4 install; cd $PWD/..;
+    - export PATH=$HOME/bison/bin:$PATH
 script:
     - ${CC} --version ; ${CXX} --version;
     - bison --version
     - pwd
     - ls -la $HOME
     - env
-    - make
-    - cd $HOME/test; ./test0.pl;
+    - make all && make test

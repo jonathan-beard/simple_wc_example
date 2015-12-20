@@ -45,6 +45,9 @@ lexer: mc_lexer.l
 	$(CXX)  $(CXXFLAGS) -c mc_lexer.yy.cc -o lexer.o
 
 
+test:
+	cd test; ./test.pl
+
 .PHONY: clean
 clean:
 	rm -rf $(CLEANLIST)
