@@ -2,7 +2,9 @@
 =================
 
 ###Build Status
-Tested on linux and OS X: [![Build Status](https://travis-ci.org/jonathan-beard/simple_wc_example.svg?branch=master)](https://travis-ci.org/jonathan-beard/simple_wc_example)
+Tested on linux and OS X
+
+[![Build Status](https://travis-ci.org/jonathan-beard/simple_wc_example.svg?branch=master)](https://travis-ci.org/jonathan-beard/simple_wc_example)
 
 ###About
 So this is a super simple parser example. The tutorial is located here: 
