@@ -7,9 +7,10 @@ my $diff = `diff temp.txt wordlist_out.txt`;
 chomp( $diff );
 if( $diff )
 {
-    print STDERR $diff;    
+    print STDERR $diff;
     unlink( "temp.txt" );
     exit( -1 );
 }
+print STDOUT "PASSED!";
 unlink( "temp.txt" );
 exit( 0 );
