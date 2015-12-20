@@ -60,6 +60,7 @@ script:
     - ${CC} --version ; ${CXX} --version;
     - bison --version
     - pwd
+    - ls -la `pwd`
     - env
     - make
     - cd test; ./test0.pl; cd ..
