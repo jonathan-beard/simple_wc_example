@@ -64,6 +64,4 @@ script:
     - ${CC} --version ; ${CXX} --version; 
     - env
     - make
-    - cd test
-    - ./test0.pl
-    - cd ..
+    - cd test; ./test0.pl; cd ..
