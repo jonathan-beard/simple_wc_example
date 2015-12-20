@@ -11,6 +11,6 @@ if( $diff )
     unlink( "temp.txt" );
     exit( -1 );
 }
-print STDERR "PASSED!";
+print STDERR "***PASSED***\n";
 unlink( "temp.txt" );
 exit( 0 );
