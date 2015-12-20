@@ -44,7 +44,7 @@ lexer: mc_lexer.l
 	flex --outfile=mc_lexer.yy.cc  $<
 	$(CXX)  $(CXXFLAGS) -c mc_lexer.yy.cc -o lexer.o
 
-
+.PHONY: test
 test:
 	cd test; ./test.pl
 
