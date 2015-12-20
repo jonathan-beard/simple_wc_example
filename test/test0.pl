@@ -2,15 +2,15 @@
 use strict;
 use warnings;
 
-system( "../my_wc wordlist.txt > temp.txt" );
-my $diff = `diff temp.txt wordlist_out.txt`;
+system( "${PWD}../my_wc wordlist.txt > ${PWD}/temp.txt" );
+my $diff = `diff ${PWD}/temp.txt ${PWD}/wordlist_out.txt`;
 chomp( $diff );
 if( $diff )
 {
     print STDERR $diff;
-    unlink( "temp.txt" );
+    unlink( "${PWD}/temp.txt" );
     exit( -1 );
 }
-print STDOUT "PASSED!";
-unlink( "temp.txt" );
+print STDERR "PASSED!";
+unlink( "${PWD}/temp.txt" );
 exit( 0 );
