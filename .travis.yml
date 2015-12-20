@@ -61,7 +61,7 @@ before_script:
     - export PATH=$PWD/bison-3.0.4/src
 
 script:
-    - ${CC} --version ; ${CXX} --version; cmake --version
+    - ${CC} --version ; ${CXX} --version; 
     - env
     - make
     - cd test
