@@ -56,9 +56,10 @@ before_script:
     - mkdir $HOME/bison
     - tar -xf bison-3.0.4.tar.gz; cd bison-3.0.4; ./configure --prefix=$HOME/bison; make -j 4 install; cd $HOME
     - export PATH=$PWD/bison/bin:$PATH
-    - bison --version
 script:
-    - ${CC} --version ; ${CXX} --version; 
+    - ${CC} --version ; ${CXX} --version;
+    - bison --version
+    - pwd
     - env
     - make
     - cd test; ./test0.pl; cd ..
