@@ -60,7 +60,7 @@ script:
     - ${CC} --version ; ${CXX} --version;
     - bison --version
     - pwd
-    - ls -la `pwd`
+    - ls -la $HOME
     - env
     - make
-    - cd test; ./test0.pl; cd ..
+    - cd $HOME/test; ./test0.pl;
