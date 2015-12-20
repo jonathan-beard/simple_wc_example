@@ -56,7 +56,9 @@ addons:
 before_script:
     - echo $LANG
     - echo $LC_ALL
-
+    - wget --no-check-certificate http://ftp.gnu.org/gnu/bison/bison-3.0.4.tar.gz
+    - tar -xf bison-3.0.4.tar.gz
+    - export PATH=$PWD/bison-3.0.4/src
 
 script:
     - ${CC} --version ; ${CXX} --version; cmake --version
