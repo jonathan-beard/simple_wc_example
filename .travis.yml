@@ -1,0 +1,67 @@
+## container build, no sudo
+sudo: false
+
+language: cpp 
+
+compiler: 
+    - gcc 
+    - clang
+
+os:
+    - linux
+
+cache:
+  apt:
+  ccache:
+  directories:
+
+env:
+    global:
+        - GCC_VERSION=5
+        - CXXFLAGS=-std=c++11
+        - CFLAGS=-std=c99
+
+branches:
+    only:
+        - master
+
+before_install:
+    -   if [ ${CC} != "clang" ]; then
+            export CC=/usr/bin/gcc-${GCC_VERSION} CXX=/usr/bin/g++-${GCC_VERSION};
+            C=gcc;
+        fi
+
+
+addons:
+ apt:
+    sources:
+      - ubuntu-toolchain-r-test
+      - llvm-toolchain-precise
+    packages:
+# ensure these match GCC_VERSION
+      - gcc-5
+      - g++-5
+      - binutils
+      - libgsl0-dev
+      - libgsl0ldbl
+      - gawk
+      - build-essential
+      - wget
+      - xz-utils
+      - libtool
+      - flex
+      - bison
+
+
+before_script:
+    - echo $LANG
+    - echo $LC_ALL
+
+
+script:
+    - ${CC} --version ; ${CXX} --version; cmake --version
+    - env
+    - make
+    - cd test
+    - ./test0.pl
+    - cd ..
