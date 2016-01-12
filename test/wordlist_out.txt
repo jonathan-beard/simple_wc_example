@@ -1,0 +1,7 @@
+Results
+Uppercase: 0
+Lowercase: 543271
+Lines: 64130
+Words: 64154
+Characters: 607454
+

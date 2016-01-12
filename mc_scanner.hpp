@@ -6,6 +6,7 @@
 #endif
 
 #include "mc_parser.tab.hh"
+#include "location.hh"
 
 namespace MC{
 
@@ -13,15 +14,21 @@ class MC_Scanner : public yyFlexLexer{
 public:
    
    MC_Scanner(std::istream *in) : yyFlexLexer(in),
-                                  yylval( nullptr ){};
+                                  yylval( nullptr )
+   {
+     loc = new MC::MC_Parser::location_type();
+   };
    
-   int yylex(MC::MC_Parser::semantic_type *lval);
+   int yylex(MC::MC_Parser::semantic_type * const lval, MC::MC_Parser::location_type *location);
    // YY_DECL defined in mc_lexer.l
    // Method body created by flex in mc_lexer.yy.cc
+
 
 private:
    /* yyval ptr */
    MC::MC_Parser::semantic_type *yylval;
+   /* location ptr */
+   MC::MC_Parser::location_type *loc;
 };
 
 } /* end namespace MC */

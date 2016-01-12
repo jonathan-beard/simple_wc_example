@@ -10,8 +10,8 @@ CXXDEBUG = -g -Wall
 CSTD = -std=c99
 CXXSTD = -std=c++11
 
-CFLAGS = -O0  $(CDEBUG) $(CSTD) 
-CXXFLAGS = -O0  $(CXXDEBUG) $(CXXSTD)
+CFLAGS = -Wno-deprecated-register -O0  $(CDEBUG) $(CSTD) 
+CXXFLAGS = -Wno-deprecated-register -O0  $(CXXDEBUG) $(CXXSTD)
 
 
 CPPOBJ = main mc_driver
@@ -44,6 +44,9 @@ lexer: mc_lexer.l
 	flex --outfile=mc_lexer.yy.cc  $<
 	$(CXX)  $(CXXFLAGS) -c mc_lexer.yy.cc -o lexer.o
 
+.PHONY: test
+test:
+	cd test && ./test0.pl
 
 .PHONY: clean
 clean:

@@ -2,6 +2,7 @@
 #define __MCDRIVER_HPP__ 1
 
 #include <string>
+#include <cstdint>
 #include "mc_scanner.hpp"
 #include "mc_parser.tab.hh"
 
@@ -9,13 +10,7 @@ namespace MC{
 
 class MC_Driver{
 public:
-   MC_Driver() : chars(0),
-                 words(0),
-                 lines(0),
-                 uppercase(0),
-                 lowercase(0),
-                 parser( nullptr ),
-                 scanner( nullptr ){};
+   MC_Driver() = default;
 
    virtual ~MC_Driver();
 
@@ -30,13 +25,13 @@ public:
 
    std::ostream& print(std::ostream &stream);
 private:
-   int chars;
-   int words;
-   int lines;
-   int uppercase;
-   int lowercase;
-   MC::MC_Parser *parser;
-   MC::MC_Scanner *scanner;
+   int chars      = 0;
+   int words      = 0;
+   int lines      = 0;
+   int uppercase  = 0;
+   int lowercase  = 0;
+   MC::MC_Parser  *parser  = nullptr;
+   MC::MC_Scanner *scanner = nullptr;
 };
 
 } /* end namespace MC */

@@ -4,7 +4,8 @@
 
 #include "mc_driver.hpp"
 
-MC::MC_Driver::~MC_Driver(){ 
+MC::MC_Driver::~MC_Driver()
+{
    delete(scanner);
    scanner = nullptr;
    delete(parser);
@@ -12,7 +13,7 @@ MC::MC_Driver::~MC_Driver(){
 }
 
 void 
-MC::MC_Driver::parse( const char *filename )
+MC::MC_Driver::parse( const char * const filename )
 {
    assert( filename != nullptr );
    std::ifstream in_file( filename );
