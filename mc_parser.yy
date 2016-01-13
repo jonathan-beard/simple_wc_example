@@ -10,6 +10,16 @@
       class MC_Driver;
       class MC_Scanner;
    }
+
+// The following definitions is missing when %locations isn't used
+# ifndef YY_NULLPTR
+#  if defined __cplusplus && 201103L <= __cplusplus
+#   define YY_NULLPTR nullptr
+#  else
+#   define YY_NULLPTR 0
+#  endif
+# endif
+
 }
 
 %parse-param { MC_Scanner  &scanner  }
@@ -27,23 +37,17 @@
 #define yylex scanner.yylex
 }
 
-/* token types */
-%union {
-   std::string *sval;
-}
+%define api.value.type variant
+%define parse.assert
 
-%token            END    0     "end of file"
-%token            UPPER
-%token            LOWER
-%token   <sval>   WORD
-%token            NEWLINE
-%token            CHAR
+%token               END    0     "end of file"
+%token               UPPER
+%token               LOWER
+%token <std::string> WORD
+%token               NEWLINE
+%token               CHAR
 
-
-/* destructor rule for <sval> objects */
-%destructor { if ($$)  { delete ($$); ($$) = nullptr; } } <sval>
 %locations
-
 
 %%
 
@@ -57,7 +61,7 @@ list
 item
   : UPPER   { driver.add_upper(); }
   | LOWER   { driver.add_lower(); }
-  | WORD    { driver.add_word( *$1 ); }
+  | WORD    { driver.add_word( $1 ); }
   | NEWLINE { driver.add_newline(); }
   | CHAR    { driver.add_char(); }
   ;

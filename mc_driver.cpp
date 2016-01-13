@@ -5,7 +5,7 @@
 #include "mc_driver.hpp"
 
 MC::MC_Driver::~MC_Driver()
-{ 
+{
    delete(scanner);
    scanner = nullptr;
    delete(parser);

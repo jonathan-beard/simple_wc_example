@@ -1,8 +1,11 @@
 %{
 /* C++ string header, for string ops below */
 #include <string>
-/* Implementation of yyFlexScanner */
+
+/* Implementation of yyFlexScanner */ 
 #include "mc_scanner.hpp"
+#undef  YY_DECL
+#define YY_DECL int MC::MC_Scanner::yylex(MC::MC_Parser::semantic_type * const lval, MC::MC_Parser::location_type *location)
 
 /* typedef to make the returns for the tokens shorter */
 typedef MC::MC_Parser::token token;
@@ -28,6 +31,10 @@ typedef MC::MC_Parser::token token;
 %option c++
 
 %%
+%{          // Code executed at the beginning of yylex
+            yylval = lval;
+%}
+
 [a-z]       {
                return( token::LOWER );
             }
@@ -37,7 +44,10 @@ typedef MC::MC_Parser::token token;
             }
 
 [a-zA-Z]+   {
-               yylval->sval = STOKEN( yytext );
+               // Section 10.1.5.1 of the 3.0.2 Bison Manual says the following should work
+               // yylval.build( yytext );
+               // But it doesn't.
+               yylval->build<std::string>( yytext );
                return( token::WORD );
             }
 
