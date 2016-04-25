@@ -17,12 +17,35 @@ MC::MC_Driver::parse( const char * const filename )
 {
    assert( filename != nullptr );
    std::ifstream in_file( filename );
-   if( ! in_file.good() ) exit( EXIT_FAILURE );
+   if( ! in_file.good() )
+   {
+       exit( EXIT_FAILURE );
+   }
+   parse_helper( in_file );
+   return;
+}
+
+void
+MC::MC_Driver::parse( std::istream &stream )
+{
+   if( ! stream.good()  && stream.eof() )
+   {
+       return;
+   }
+   //else
+   parse_helper( stream ); 
+   return;
+}
+
+
+void 
+MC::MC_Driver::parse_helper( std::istream &stream )
+{
    
    delete(scanner);
    try
    {
-      scanner = new MC::MC_Scanner( &in_file );
+      scanner = new MC::MC_Scanner( &stream );
    }
    catch( std::bad_alloc &ba )
    {
@@ -48,6 +71,7 @@ MC::MC_Driver::parse( const char * const filename )
    {
       std::cerr << "Parse failed!!\n";
    }
+   return;
 }
 
 void 
@@ -100,10 +124,11 @@ MC::MC_Driver::add_char()
 std::ostream& 
 MC::MC_Driver::print( std::ostream &stream )
 {
-   stream << "Uppercase: " << uppercase << "\n";
-   stream << "Lowercase: " << lowercase << "\n";
-   stream << "Lines: " << lines << "\n";
-   stream << "Words: " << words << "\n";
-   stream << "Characters: " << chars << "\n";
+   stream << red  << "Results: " << norm << "\n";
+   stream << blue << "Uppercase: " << norm << uppercase << "\n";
+   stream << blue << "Lowercase: " << norm << lowercase << "\n";
+   stream << blue << "Lines: " << norm << lines << "\n";
+   stream << blue << "Words: " << norm << words << "\n";
+   stream << blue << "Characters: " << norm << chars << "\n";
    return(stream);
 }

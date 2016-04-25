@@ -18,8 +18,13 @@ public:
    {
      loc = new MC::MC_Parser::location_type();
    };
-   
-   int yylex(MC::MC_Parser::semantic_type * const lval, MC::MC_Parser::location_type *location);
+  
+   //get rid of override virtual function warning
+   using FlexLexer::yylex;
+
+   virtual
+   int yylex( MC::MC_Parser::semantic_type * const lval, 
+              MC::MC_Parser::location_type *location );
    // YY_DECL defined in mc_lexer.l
    // Method body created by flex in mc_lexer.yy.cc
 
