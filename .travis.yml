@@ -56,6 +56,9 @@ before_script:
     - mkdir $HOME/bison
     - tar -xf bison-3.0.4.tar.gz; cd bison-3.0.4; ./configure --prefix=$HOME/bison; make -j 4 install; cd $PWD/..;
     - export PATH=$HOME/bison/bin:$PATH
+    - wget --no-check-certificate http://llvm.org/releases/3.7.1/clang+llvm-3.7.1-x86_64-linux-gnu-ubuntu-14.04.tar.xz;
+    - tar -xf clang+llvm-3.7.1-x86_64-linux-gnu-ubuntu-14.04.tar.xz
+    - export PATH=$PWD/clang+llvm-3.7.1-x86_64-linux-gnu-ubuntu-14.04/bin:$PATH
 script:
     - ${CC} --version ; ${CXX} --version;
     - bison --version
