@@ -13,10 +13,9 @@ namespace MC{
 class MC_Scanner : public yyFlexLexer{
 public:
    
-   MC_Scanner(std::istream *in) : yyFlexLexer(in),
-                                  yylval( nullptr )
+   MC_Scanner(std::istream *in) : yyFlexLexer(in)
    {
-     loc = new MC::MC_Parser::location_type();
+      loc = new MC::MC_Parser::location_type();
    };
   
    //get rid of override virtual function warning
@@ -31,9 +30,9 @@ public:
 
 private:
    /* yyval ptr */
-   MC::MC_Parser::semantic_type *yylval;
+   MC::MC_Parser::semantic_type *yylval = nullptr;
    /* location ptr */
-   MC::MC_Parser::location_type *loc;
+   MC::MC_Parser::location_type *loc    = nullptr;
 };
 
 } /* end namespace MC */

@@ -5,13 +5,10 @@
 /* Implementation of yyFlexScanner */ 
 #include "mc_scanner.hpp"
 #undef  YY_DECL
-#define YY_DECL int MC::MC_Scanner::yylex(MC::MC_Parser::semantic_type * const lval, MC::MC_Parser::location_type *location)
+#define YY_DECL int MC::MC_Scanner::yylex( MC::MC_Parser::semantic_type * const lval, MC::MC_Parser::location_type *location )
 
 /* typedef to make the returns for the tokens shorter */
-typedef MC::MC_Parser::token token;
-
-/* define to keep from re-typing the same code over and over */
-#define STOKEN( x ) ( new std::string( x ) )
+using token = MC::MC_Parser::token;
 
 /* define yyterminate as this instead of NULL */
 #define yyterminate() return( token::END )
@@ -31,7 +28,7 @@ typedef MC::MC_Parser::token token;
 %option c++
 
 %%
-%{          // Code executed at the beginning of yylex
+%{          /** Code executed at the beginning of yylex **/
             yylval = lval;
 %}
 
@@ -44,10 +41,14 @@ typedef MC::MC_Parser::token token;
             }
 
 [a-zA-Z]+   {
-               // Section 10.1.5.1 of the 3.0.2 Bison Manual says the following should work
-               // yylval.build( yytext );
-               // But it doesn't.
-               yylval->build<std::string>( yytext );
+               /**
+                * Section 10.1.5.1 of the 3.0.2 Bison Manual says the 
+                * following should work:
+                * yylval.build( yytext );
+                * but it doesn't.
+                * ref: http://goo.gl/KLn0w2
+                */
+               yylval->build< std::string >( yytext );
                return( token::WORD );
             }
 
