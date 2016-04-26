@@ -8,7 +8,7 @@ CDEBUG = -g -Wall
 CXXDEBUG = -g -Wall
 
 CSTD = -std=c99
-CXXSTD = -std=c++11
+CXXSTD = -std=c++14
 
 CFLAGS = -Wno-deprecated-register -O0  $(CDEBUG) $(CSTD) 
 CXXFLAGS = -Wno-deprecated-register -O0  $(CXXDEBUG) $(CXXSTD)
