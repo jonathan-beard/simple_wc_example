@@ -12,12 +12,12 @@ main( const int argc, const char **argv )
    {
       MC::MC_Driver driver;
       /** example for piping input from terminal, i.e., using cat **/ 
-      if( strncmp( argv[ 1 ], "-o", 2 ) == 0 )
+      if( std::strncmp( argv[ 1 ], "-o", 2 ) == 0 )
       {
          driver.parse( std::cin );
       }
       /** simple help menu **/
-      else if( strncmp( argv[ 1 ], "-h", 2 ) == 0 )
+      else if( std::strncmp( argv[ 1 ], "-h", 2 ) == 0 )
       {
          std::cout << "use -o for pipe to std::cin\n";
          std::cout << "just give a filename to count from a file\n";
