@@ -17,7 +17,10 @@ public:
    {
       loc = new MC::MC_Parser::location_type();
    };
-  
+   virtual ~MC_Scanner() {
+      delete loc;
+   };
+
    //get rid of override virtual function warning
    using FlexLexer::yylex;
 
