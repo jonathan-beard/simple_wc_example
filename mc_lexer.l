@@ -5,7 +5,7 @@
 /* Implementation of yyFlexScanner */ 
 #include "mc_scanner.hpp"
 #undef  YY_DECL
-#define YY_DECL int MC::MC_Scanner::yylex( MC::MC_Parser::semantic_type * const lval, MC::MC_Parser::location_type *location )
+#define YY_DECL int MC::MC_Scanner::yylex( MC::MC_Parser::semantic_type * const lval, MC::MC_Parser::location_type *loc )
 
 /* typedef to make the returns for the tokens shorter */
 using token = MC::MC_Parser::token;
