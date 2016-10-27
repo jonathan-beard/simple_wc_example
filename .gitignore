@@ -8,3 +8,4 @@ mc_parser.output
 mc_parser.tab.cc
 mc_parser.tab.hh
 my_wc
+build*/

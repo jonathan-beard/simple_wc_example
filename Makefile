@@ -46,7 +46,7 @@ lexer: mc_lexer.l
 
 .PHONY: test
 test:
-	cd test && ./test0.pl
+	test/test0.pl
 
 .PHONY: clean
 clean:
