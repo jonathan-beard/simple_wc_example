@@ -15,10 +15,8 @@ public:
    
    MC_Scanner(std::istream *in) : yyFlexLexer(in)
    {
-      loc = new MC::MC_Parser::location_type();
    };
    virtual ~MC_Scanner() {
-      delete loc;
    };
 
    //get rid of override virtual function warning
@@ -34,8 +32,6 @@ public:
 private:
    /* yyval ptr */
    MC::MC_Parser::semantic_type *yylval = nullptr;
-   /* location ptr */
-   MC::MC_Parser::location_type *loc    = nullptr;
 };
 
 } /* end namespace MC */
