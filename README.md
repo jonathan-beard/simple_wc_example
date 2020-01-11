@@ -43,7 +43,13 @@ To run the simple test after make call
 
     ctest
 
-.
+**NOTE FOR OS X USERS**: I've heard of some issues compiling if you've installed 
+command line tools, then XCode.app afterwards on Catalina (with bash). When compiling with 
+```clang++```, the C++ header files aren't found. If you have this issue, exporting an environment
+variable, such as this, 
+```export CXX=/usr/bin/clang++```, seems to be a workaround. If anybody has a better
+solution (aside from wiping out all build tools and reinstalling) please let
+me know. 
 
 
 Thanks!
