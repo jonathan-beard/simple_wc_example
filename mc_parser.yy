@@ -3,7 +3,13 @@
 %debug 
 %defines 
 %define api.namespace {MC}
-%define parser_class_name {MC_Parser}
+/**
+ * bison 3.3.2 change
+ * %define parser_class_name to this, updated
+ * should work for previous bison versions as 
+ * well. -jcb 24 Jan 2020
+ */
+%define api.parser.class {MC_Parser}
 
 %code requires{
    namespace MC {
